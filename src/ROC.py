@@ -46,3 +46,7 @@ if __name__ == '__main__':
                 falsePositiveRates = np.divide(positiveCounts, float(len(imgFilePairs)))
                 #print falsePositiveRates
         print np.trapz(truePositiveRates, falsePositiveRates)
+    
+'''
+
+'''

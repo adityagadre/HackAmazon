@@ -12,10 +12,13 @@ import sys
 debug = False
 
 def blur(img):
-    sz = 9
+    #sz = 9
     #kernel = np.ones((sz,sz),np.float32)/(sz*sz)
     #filtered = cv2.filter2D(img,-1,kernel)
-    return cv2.GaussianBlur(img,(sz,sz),4)
+    #return cv2.GaussianBlur(img,(sz,sz),3.5)
+    d = 14
+    sigma = 150
+    return cv2.bilateralFilter(img, d, sigma, sigma)
 
 def preprocess(img):
     descriptorExtractor = cv2.SIFT()
@@ -23,15 +26,21 @@ def preprocess(img):
     kp, desc = descriptorExtractor.detectAndCompute(img, None)
     return kp, desc, cv2.drawKeypoints(img,kp)
 
+def preprocess2(img):
+    surf = cv2.SURF(200)
+    return surf.detectAndCompute(img, None)
+
 def hack(imgFile1, imgFile2):
-    #img1 = cv2.cvtColor(cv2.imread(imgFile1, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
-    #img2 = cv2.cvtColor(cv2.imread(imgFile2, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
-    img1 = cv2.imread(imgFile1)
-    img2 = cv2.imread(imgFile2)
+    img1 = cv2.cvtColor(cv2.imread(imgFile1, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
+    img2 = cv2.cvtColor(cv2.imread(imgFile2, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
+    #img1 = cv2.imread(imgFile1, cv2.IMREAD_GRAYSCALE)
+    #img2 = cv2.imread(imgFile2, cv2.IMREAD_GRAYSCALE)
     if img1 is None or img2 is None:
         raise
     kp1, desc1, processed1 = preprocess(blur(img1))
     kp2, desc2, processed2 = preprocess(blur(img2))
+    #kp1, desc1 = preprocess2(blur(img1))
+    #kp2, desc2 = preprocess2(blur(img2))
     
 #     if debug:
 #         plt.subplot(231),plt.imshow(img1),plt.title('Original')
@@ -47,6 +56,9 @@ def hack(imgFile1, imgFile2):
 #         plt.subplot(236),plt.imshow(imgProcessed2),plt.title('Keypoints')
 #         plt.xticks([]), plt.yticks([])
 #         plt.show()
+
+    if (desc1 is None or len(desc1) == 0) and (desc2 is None or len(desc2) == 0):
+        return 0
     
     # create BFMatcher object
     bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck = True)
