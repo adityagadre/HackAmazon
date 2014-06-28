@@ -53,7 +53,7 @@ def hack(imgFile1, imgFile2):
     
     matches = bf.match(desc1, desc2)
     matches = [m for m in matches if m.distance < 100]
-    return 100 * (1 - float(len(matches)) / max(len(desc1), len(desc2)))
+    return round(100 * (1 - float(len(matches)) / max(len(desc1), len(desc2))))
 
 ''' 
     # visualize the matches
@@ -101,4 +101,4 @@ def hack(imgFile1, imgFile2):
 
 if __name__ == '__main__':
     arr = sys.argv
-    print("{0:.2f}".format(hack(arr[1], arr[2])))
+    print("{0:.0f}".format(hack(arr[1], arr[2])))
