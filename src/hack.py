@@ -11,7 +11,7 @@ import sys
 
 debug = False
 
-def filter(img):
+def blur(img):
     sz = 9
     #kernel = np.ones((sz,sz),np.float32)/(sz*sz)
     #filtered = cv2.filter2D(img,-1,kernel)
@@ -30,8 +30,8 @@ def hack(imgFile1, imgFile2):
     img2 = cv2.imread(imgFile2)
     if img1 is None or img2 is None:
         raise
-    kp1, desc1, processed1 = preprocess(img1)
-    kp2, desc2, processed2 = preprocess(img2)
+    kp1, desc1, processed1 = preprocess(blur(img1))
+    kp2, desc2, processed2 = preprocess(blur(img2))
     
 #     if debug:
 #         plt.subplot(231),plt.imshow(img1),plt.title('Original')
@@ -52,6 +52,7 @@ def hack(imgFile1, imgFile2):
     bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck = True)
     
     matches = bf.match(desc1, desc2)
+    matches = [m for m in matches if m.distance < 100]
     return 100 * (1 - float(len(matches)) / max(len(desc1), len(desc2)))
 
 ''' 
