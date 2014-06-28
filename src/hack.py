@@ -94,7 +94,7 @@ def hack(imgFile1, imgFile2):
 #print hack('../distrib/set1/unchanged/pair_0000_inbound.jpg', '../distrib/set1/unchanged/pair_0000_outbound.jpg')
 #print hack('../distrib/set2/unchanged/pair_0000_before.jpg', '../distrib/set2/unchanged/pair_0000_later.jpg')
 #print hack('../distrib/set3/changed/pair_0006_inbound.jpg', '../distrib/set3/changed/pair_0006_outbound.jpg')
-print hack('../distrib/set3/unchanged/pair_0938_inbound.jpg', '../distrib/set3/unchanged/pair_0938_outbound.jpg')
+#print hack('../distrib/set3/unchanged/pair_0938_inbound.jpg', '../distrib/set3/unchanged/pair_0938_outbound.jpg')
 
 if __name__ == '__main__':
     arr = sys.argv
