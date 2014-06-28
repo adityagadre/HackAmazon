@@ -4,8 +4,6 @@ Created on Jun 27, 2014
 @author: BrianTruong
 '''
 
-nsets = 3
-
 import numpy as np
 import hack
 import os
@@ -48,7 +46,3 @@ if __name__ == '__main__':
                 falsePositiveRates = np.divide(positiveCounts, float(len(imgFilePairs)))
                 #print falsePositiveRates
         print np.trapz(truePositiveRates, falsePositiveRates)
-    
-'''
-
-'''
