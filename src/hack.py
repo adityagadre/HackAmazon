@@ -67,8 +67,8 @@ def hack(imgFile1, imgFile2):
     bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck = True)
     
     matches = bf.match(desc1, desc2)
-    matches = [m for m in matches if m.distance < 150]
-    return round(100 * (1 - float(len(matches)) / max(len(desc1), len(desc2))))
+    matches = [m for m in matches if m.distance < 64]
+    return round(100 * (1 - float(2 * len(matches)) / (len(desc1) + len(desc2))))
 
 ''' 
     # visualize the matches
