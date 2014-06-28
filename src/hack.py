@@ -23,8 +23,8 @@ def preprocess(img):
     return kp, desc, filtered, cv2.drawKeypoints(filtered,kp)
 
 def hack(imgFile1, imgFile2):
-    img1 = cv2.cvtColor(cv2.imread(imgFile1, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY);
-    img2 = cv2.cvtColor(cv2.imread(imgFile2, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY);
+    img1 = cv2.cvtColor(cv2.imread(imgFile1, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
+    img2 = cv2.cvtColor(cv2.imread(imgFile2, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
     if img1 is None or img2 is None:
         raise
     kp1, desc1, filtered1, imgProcessed1 = preprocess(img1)
@@ -55,4 +55,4 @@ def hack(imgFile1, imgFile2):
 #print hack('../distrib/set2/unchanged/pair_0000_before.jpg', '../distrib/set2/unchanged/pair_0000_later.jpg')
 
 arr = sys.argv
-print hack(arr[0], arr[1])
+print hack(arr[1], arr[2])
