@@ -100,4 +100,4 @@ def hack(imgFile1, imgFile2):
 
 if __name__ == '__main__':
     arr = sys.argv
-    print hack(arr[1], arr[2])
+    print("{0:.2f}".format(hack(arr[1], arr[2])))
