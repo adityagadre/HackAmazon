@@ -57,14 +57,17 @@ def hack(imgFile1, imgFile2):
 #         plt.xticks([]), plt.yticks([])
 #         plt.show()
 
-    if (desc1 is None or len(desc1) == 0) and (desc2 is None or len(desc2) == 0):
+    if desc1 is None or desc2 is None:
+        return 0
+
+    if len(desc1) == 0 or len(desc2) == 0:
         return 0
     
     # create BFMatcher object
     bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck = True)
     
     matches = bf.match(desc1, desc2)
-    matches = [m for m in matches if m.distance < (len(img1) + len(img1[0]))/4]
+    matches = [m for m in matches if m.distance < 150]
     return round(100 * (1 - float(len(matches)) / max(len(desc1), len(desc2))))
 
 ''' 
