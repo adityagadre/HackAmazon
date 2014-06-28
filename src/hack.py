@@ -6,6 +6,7 @@ Created on Jun 27, 2014
 
 import numpy as np
 import cv2
+import sys
 #from matplotlib import pyplot as plt
 
 debug = False
@@ -52,3 +53,6 @@ def hack(imgFile1, imgFile2):
 
 #print hack('../distrib/set1/unchanged/pair_0000_inbound.jpg', '../distrib/set1/unchanged/pair_0000_outbound.jpg')
 #print hack('../distrib/set2/unchanged/pair_0000_before.jpg', '../distrib/set2/unchanged/pair_0000_later.jpg')
+
+arr = sys.argv
+print hack(arr[0], arr[1])
