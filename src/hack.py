@@ -11,27 +11,27 @@ import sys
 
 debug = False
 
-def preprocess(img):
-    
+def filter(img):
     sz = 9
-    kernel = np.ones((sz,sz),np.float32)/(sz*sz)
+    #kernel = np.ones((sz,sz),np.float32)/(sz*sz)
     #filtered = cv2.filter2D(img,-1,kernel)
-    filtered = cv2.GaussianBlur(img,(sz,sz),4)
-    
+    return cv2.GaussianBlur(img,(sz,sz),4)
+
+def preprocess(img):
     descriptorExtractor = cv2.SIFT()
     
-    kp, desc = descriptorExtractor.detectAndCompute(filtered, None)
-    return kp, desc, filtered, cv2.drawKeypoints(filtered,kp)
+    kp, desc = descriptorExtractor.detectAndCompute(img, None)
+    return kp, desc, cv2.drawKeypoints(img,kp)
 
 def hack(imgFile1, imgFile2):
     #img1 = cv2.cvtColor(cv2.imread(imgFile1, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
     #img2 = cv2.cvtColor(cv2.imread(imgFile2, cv2.IMREAD_COLOR), cv2.COLOR_RGB2GRAY)
-    img1 = cv2.imread(imgFile1, cv2.IMREAD_GRAYSCALE)
-    img2 = cv2.imread(imgFile2, cv2.IMREAD_GRAYSCALE)
+    img1 = cv2.imread(imgFile1)
+    img2 = cv2.imread(imgFile2)
     if img1 is None or img2 is None:
         raise
-    kp1, desc1, filtered1, imgProcessed1 = preprocess(img1)
-    kp2, desc2, filtered2, imgProcessed2 = preprocess(img2)
+    kp1, desc1, processed1 = preprocess(img1)
+    kp2, desc2, processed2 = preprocess(img2)
     
 #     if debug:
 #         plt.subplot(231),plt.imshow(img1),plt.title('Original')
