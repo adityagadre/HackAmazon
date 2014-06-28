@@ -16,7 +16,7 @@ def preprocess(img):
     sz = 9
     kernel = np.ones((sz,sz),np.float32)/(sz*sz)
     #filtered = cv2.filter2D(img,-1,kernel)
-    filtered = cv2.GaussianBlur(img,(sz,sz),4,borderType=cv2.BORDER_DEFAULT)
+    filtered = cv2.GaussianBlur(img,(sz,sz),4)
     
     descriptorExtractor = cv2.SIFT()
     
@@ -96,6 +96,6 @@ def hack(imgFile1, imgFile2):
 #print hack('../distrib/set3/changed/pair_0006_inbound.jpg', '../distrib/set3/changed/pair_0006_outbound.jpg')
 #print hack('../distrib/set3/unchanged/pair_0938_inbound.jpg', '../distrib/set3/unchanged/pair_0938_outbound.jpg')
 
-#if __name__ == '__main__':
-arr = sys.argv
-print hack(arr[1], arr[2])
+if __name__ == '__main__':
+    arr = sys.argv
+    print hack(arr[1], arr[2])
