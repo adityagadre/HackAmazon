@@ -12,13 +12,13 @@ import sys
 debug = False
 
 def blur(img):
-    #sz = 9
+    sz = 9
     #kernel = np.ones((sz,sz),np.float32)/(sz*sz)
     #filtered = cv2.filter2D(img,-1,kernel)
-    #return cv2.GaussianBlur(img,(sz,sz),3.5)
-    d = 14
-    sigma = 150
-    return cv2.bilateralFilter(img, d, sigma, sigma)
+    return cv2.GaussianBlur(img,(sz,sz),3.5)
+#     d = 14
+#     sigma = 150
+#     return cv2.bilateralFilter(img, d, sigma, sigma)
 
 def preprocess(img):
     descriptorExtractor = cv2.SIFT()
